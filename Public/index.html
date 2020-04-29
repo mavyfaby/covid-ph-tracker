@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+        <meta http-equiv="Content-Security-Policy" content="object-src 'none'" />
+		<meta name="author" content="Maverick G. Fabroa" />
+		<meta name="description" content="Get the latest coronavirus updates in the Philippines with graphical data." />
+		<meta name="keywords" content="covid, corona, tracker, data, pandemic" />
+		<meta name="theme-color" content="#202020" />
+		<meta name="mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta property="og:title" content="Mavyfaby | Coronavirus PH" />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://covid-ph.mavyfaby.ml" />
+		<meta property="og:description" content="Get the latest coronavirus updates in the Philippines with graphical data." />
+		<meta property="og:email" content="maverickfabroa@gmail.com" />
+		<meta property="og:phone_number" content="+639229629963" />
+		<meta property="og:image" content="https://covid19.mathdro.id/api/countries/PH/og" />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="627" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Mavyfaby | Coronavirus PH</title>
+		<!-- Site Icon -->
+		<link rel="shortcut icon" type="image/x-icon" href="./assets/images/icon.png" /> 
+		<!-- Fonts -->
+		<link rel="stylesheet" type="text/css" href="./assets/fonts/Google/font.css" />
+		<link rel="stylesheet" type="text/css" href="./assets/fonts/material-icons/font.css" />
+		<link rel="stylesheet" type="text/css" href="./assets/fonts/OpenSans/font.css" />
+		<!-- Chart (CSS) -->
+		<link rel="stylesheet" type="text/css" href="./assets/libraries/chart/dist/Chart.min.css" />
+		<!-- Material Design (CSS) -->
+		<link rel="stylesheet" type="text/css" href="./assets/libraries/MaterialDesign/css/material-components-web.min.css" />
+		<!-- Custom -->
+		<link rel="stylesheet" type="text/css" href="./assets/css/sheets.min.css" />
+	</head>
+	<body>
+		<app>
+			<mdc-top-app-bar v-bind:title="app_name"></mdc-top-app-bar>
+			<loader text="Loading..."></loader>
+			<button @click="share()" class="mdc-fab share" aria-label="Share">
+				<div class="mdc-fab__ripple"></div>
+				<span class="mdc-fab__icon material-icons">share</span>
+			</button>
+			<div class="mdc-snackbar">
+				<div class="mdc-snackbar__surface">
+					<div class="mdc-snackbar__label sbText" role="status" aria-live="polite"></div>
+					<div class="mdc-snackbar__actions">
+						<button class="mdc-button mdc-snackbar__action">
+							<div class="mdc-button__ripple"></div>
+							<span class="mdc-button__label">Okay</span>
+						</button>
+					</div>
+				</div>
+			</div>
+			<div class="main-content">
+				<overline>Philippines</overline>
+				<mdc-grid>
+					<mdc-grid-inner>
+						<mdc-grid-cell phone="4" desktop="6">
+							<mdc-card main>
+								<mdc-grid>
+									<mdc-grid-inner>
+										<mdc-grid-cell phone="4" desktop="12">
+											<h1>{{ fns(data.totalCases) }}</h1>
+											<p>Total Cases</p>
+										</mdc-grid-cell>
+										<mdc-grid-cell phone="4" desktop="12">
+											<h1>{{ fns(data.totalActive) }}</h1>
+											<p>Total Active Cases</p>
+										</mdc-grid-cell>
+										<mdc-grid-cell phone="2" desktop="6">
+											<h3>{{ fns(data.totalRecovered) }}</h3>
+											<p>Total Recoveries</p>
+										</mdc-grid-cell>
+										<mdc-grid-cell phone="2" desktop="6">
+											<h3>{{ fns(data.totalDeaths) }}</h3>
+											<p>Total Deaths</p>
+										</mdc-grid-cell>
+										<mdc-grid-cell phone="2" desktop="6">
+											<h3>{{ fns(data.todayCases) }}</h3>
+											<p>Today Cases</p>
+										</mdc-grid-cell>
+										<mdc-grid-cell phone="2" desktop="6">
+											<h3>{{ fns(data.todayDeaths) }}</h3>
+											<p>Today Deaths</p>
+										</mdc-grid-cell>
+										<mdc-grid-cell phone="4" desktop="12">
+											<small>{{ data.lastUpdated }}</small>
+										</mdc-grid-cell>
+									</mdc-grid-inner>
+								</mdc-grid>
+							</mdc-card>
+						</mdc-grid-cell>
+						<mdc-grid-cell phone="4" desktop="6">
+							<chart id="active-cases"></chart>
+						</mdc-grid-cell>
+						<mdc-grid-cell phone="4" desktop="4">
+							<chart id="total-cases"></chart>
+						</mdc-grid-cell>
+						<mdc-grid-cell phone="4" desktop="4">
+							<chart id="recovered-cases"></chart>
+						</mdc-grid-cell>
+						<mdc-grid-cell phone="4" desktop="4">
+							<chart id="death-cases"></chart>
+						</mdc-grid-cell>
+						<mdc-grid-cell phone="4" desktop="4">
+							<chart id="cases-per-day"></chart>
+						</mdc-grid-cell>
+						<mdc-grid-cell phone="4" desktop="4">
+							<chart id="recoveries-per-day"></chart>
+						</mdc-grid-cell>
+						<mdc-grid-cell phone="4" desktop="4">
+							<chart id="deaths-per-day"></chart>
+						</mdc-grid-cell>
+					</mdc-grid-inner>
+				</mdc-grid>
+			</div>
+			<div class="footer">
+				<mdc-grid>
+					<mdc-grid-inner>
+						<mdc-grid-cell phone="4" desktop="6">
+							<h2>Social</h2>
+							<ul class="list">
+								<li><b>Facebook:</b> <a target="_blank" href="https://facebook.com/mavyfaby">https://facebook.com/mavyfaby</a></li>
+								<li><b>Email:</b> <a href="mailto:maverickfabroa@gmail.com">maverickfabroa@gmail.com</a></li>
+								<li><b>Github Repo:</b> <a target="_blank" href="https://github.com/mavyfaby/covid-ph-tracker">mavyfaby/covid-ph-tracker</a></li>
+							</ul>
+						</mdc-grid-cell>
+						<mdc-grid-cell phone="4" desktop="6">
+						<h2>Resources</h2>
+							<ul class="list">
+								<li><a target="_blank" href="https://github.com/mathdroid/covid-19-api">https://github.com/mathdroid/covid-19-api</a></li>
+								<li><a target="_blank" href="https://github.com/javieraviles/covidAPI">https://github.com/javieraviles/covidAPI</a></li>
+								<li><a target="_blank" href="https://github.com/AlaeddineMessadi/COVID-19-REPORT-API">https://github.com/AlaeddineMessadi/COVID-19-REPORT-API</a></li>
+							</ul>
+						</mdc-grid-cell>
+					</mdc-grid-inner>
+				</mdc-grid>
+				<p>Copyright © 2020 | <b>Maverick G. Fabroa</b></p>
+				<p style="margin: 1em 1em 0.5em 1em;">Licensed under <a style="color: rgb(54, 162, 235)" href="https://mit.edu">MIT License</a></p>
+			</div>
+		</app>
+		<!-- Moment -->
+		<script type="text/javascript" src="./assets/libraries/moment/moment.min.js"></script>
+		<!-- jQuery -->
+		<script type="text/javascript" src="./assets/libraries/jquery/jquery.min.js"></script>
+		<!-- Vue -->
+		<script type="text/javascript" src="./assets/libraries/vue/vue.min.js"></script>
+		<!-- Material Design (JS) -->
+		<script type="text/javascript" src="./assets/libraries/MaterialDesign/js/material-components-web.min.js"></script>
+		<!-- Chart -->
+		<script type="text/javascript" src="./assets/libraries/chart/dist/Chart.min.js"></script>
+		<!-- Graphs -->
+		<script type="text/javascript" src="./assets/js/graphs.js"></script>
+		<!-- Components -->
+		<script type="text/javascript" src="./assets/js/v-components.js"></script>
+		<!-- Main -->
+		<script type="text/javascript" src="./assets/js/script.js"></script>
+	</body>
+</html>

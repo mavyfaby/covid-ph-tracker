@@ -1,0 +1,29 @@
+{
+  "name": "covid-19-ph",
+  "version": "1.0.0",
+  "description": "Coronavirus Tracker in the Philippines",
+  "main": "index.js",
+  "scripts": {
+    "prod": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mavyfaby/covid-ph-tracker.git"
+  },
+  "keywords": [
+    "node",
+    "covid",
+    "ph",
+    "data",
+    "js"
+  ],
+  "author": "Maverick G. Fabroa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mavyfaby/covid-ph-tracker/issues"
+  },
+  "homepage": "https://github.com/mavyfaby/covid-ph-tracker#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
