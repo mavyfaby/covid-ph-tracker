@@ -2,7 +2,7 @@
 
 Coronavirus Tracker in the Philippines
 
-Website: [https://covid-ph.mavyfaby.ml](https://covid-ph.mavyfaby.ml)
+Website: [https://mavyfaby.ml/projects/covid-ph](https://mavyfaby.ml/projects/covid-ph)
 
 To run locally:
 - `git clone https://github.com/mavyfaby/covid-ph-tracker`
